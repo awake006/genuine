@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Moment</title>
+    <link rel="stylesheet" type="text/css" href="./static/css/style.css" media="screen">
+    <link rel="shortcut icon" href="./static/css/img/favicon.ico" type="image/x-icon" />
+</head>
+
+<body class="success">
+    <div class="top">
+        <div class="top-content container">
+            <img src="./static/css/img/logo.png" class="logo" />
+            <div class="boxes">
+                    <div class="top_box"> 
+                            <div class="label box_status">Operation</div>
+                        <a href="#" class="new_test" id="connect_test">connect</a>
+                        <a href="#" class="new_test" id="new_test">New test</a>
+                    </div>
+                <div class="top_box box_status">
+                    <div class="label">STATUS</div>
+                    <div class="value" id="status_text">
+                    </div>
+                </div>
+                <div class="top_box box_rps box_running" id="box_rps">
+                    <div class="label">TPS</div>
+                    <div class="value" id="total_rps">0</div>
+                </div>
+                <div class="top_box box_stop box_running" id="box_stop">
+                    <a href="./stop" class="stop-button"><i></i>STOP</a>
+                </div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="start" id="start" style="display:none;">
+            <div style="position:relative;">
+                <a href="#" class="close_link">Close</a>
+            </div>
+            <div class="padder">
+                <h2>Start new Test</h2>
+                <form action="./swarm" method="POST" id="swarm_form">
+                    <label for="locust_count">Number of users to simulate</label>
+                    <input type="text" name="locust_count" id="locust_count" class="val" /><br>
+                    <label for="run_time">Run time <span style="color:#8a8a8a;">(second)</span></label>
+                    <input type="text" name="run_time" id="run_time" class="val" /><br>
+                    <label for="contract_address">Contract address</label>
+                    <input type="text" name="contract_address" id="contract_address" class="val" /><br>
+                    <label for="contract_param">Contract param</label>
+                    <input type="text" name="contract_param" id="contract_param" class="val" /><br>
+                    <label ><span style="color:red;" id="start_error"></span></label>
+                    <button type="submit">Start</button>
+                </form>
+                <div style="clear:right;"></div>
+            </div>
+        </div>
+        <div class="start" id="connect" style="display:none;">
+            <div style="position:relative;">
+                <a href="#" class="close_link">Close</a>
+            </div>
+            <div class="padder">
+                <h2>Start Connect</h2>
+                <form action="./connect" method="POST" id="start_connect">
+                    <label for="url">RPCURL<span style="color:#8a8a8a;">(多个节点用","隔开)</span></label>
+                    <input type="text" name="url" id="url" class="val" /><br>
+                    <label for="chain_id">Chain id <span style="color:#8a8a8a;">(用于签名)</span></label>
+                    <input type="text" name="chain_id" id="chain_id" class="val" /><br>
+                    <label ><span style="color:red;" id="connect_error"></span></label>
+                    <button type="submit">Connect</button>
+                </form>
+                <div style="clear:right;"></div>
+            </div>
+        </div>
+        <div class="status" id="status">
+            <nav class="menu">
+                <ul class="tabs container">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#" class="chart-tab-link">Charts</a></li>
+                    <li><a href="#">Failures</a></li>
+                    <li><a href="#">Slaves</a></li>
+                </ul>
+            </nav>
+            <div class="panes container">
+                <div style="display:none;">
+                    我是首页
+                </div>
+                <div id="charts" style="display:none;">
+                    <div class="charts-container"></div>
+                    <p class="note">Note: There is no persistence of these charts, if you refresh this page, new charts will be created.</p>
+                </div>
+                <div style="display:none;">
+                    <table id="errors" class="stats">
+                        <thead>
+                            <th class="error_count stats_label" data-sortkey="1"># fails</th>
+                            <th class="stats_label" href="#" data-sortkey="from">From</th>
+                            <th class="stats_label" href="#" data-sortkey="to">To</th>
+                            <th class="error_type stats_label" data-sortkey="0">ErrorInfo</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="about" style="display:none;">
+            <div style="position:relative;">
+                <a href="#" class="close_link">Close</a>
+            </div>
+            <div class="padder">
+                <h1>About</h1>
+                <p>
+                    The original idea for Locust was Carl Byström's who made a first proof of concept in June 2010. Jonatan Heyman picked up Locust in January 2011, implemented the current concept of Locust classes and made it work distributed across multiple machines.
+                </p>
+                <p>
+                    Jonatan, Carl and Joakim Hamrén has continued the development of Locust at their job, ESN Social Software, who have adopted Locust as an inhouse Open Source project.
+                </p>
+
+                <h1>Authors and Copyright</h1>
+                <a href="http://cgbystrom.com/">Carl Byström</a> (<a href="https://twitter.com/cgbystrom/">@cgbystrom</a>)<br>
+                <a href="http://heyman.info/">Jonatan Heyman</a> (<a href="https://twitter.com/jonatanheyman/">@jonatanheyman</a>)<br> Joakim Hamrén (<a href="https://twitter.com/Jahaaja/">@jahaaja</a>)<br>
+                <a href="http://esn.me/">ESN Social Software</a> (<a href="https://twitter.com/uprise_ea/">@uprise_ea</a>)<br> Hugo Heyman (<a href="https://twitter.com/hugoheyman/">@hugoheyman</a>)
+
+
+                <h1>License</h1>
+                Open source licensed under the MIT license.
+
+                <h2>Version
+                    <a href="https://github.com/locustio/locust"></a>
+                </h2>
+                <br>
+                <a href="https://locust.io/">https://locust.io</a>
+            </div>
+        </div>
+    </div>
+    <nav class="footer">
+        <div class="container">
+            <a href="#" onclick="$('.about').fadeIn();">About</a>
+        </div>
+    </nav>
+
+
+    <script type="text/javascript" src="./static/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./static/js/jquery.jqote2.min.js"></script>
+    <script type="text/javascript" src="./static/js/jquery.tools.min.js"></script>
+    <!-- echarts from https://github.com/ecomfe/echarts -->
+    <script type="text/javascript" src="./static/js/echarts.common.min.js"></script>
+    <!-- vintage theme of echarts -->
+    <script type="text/javascript" src="./static/js/vintage.js"></script>
+    <!-- <script type="text/x-jqote-template" id="errors-template">
+        <![CDATA[
+        <tr class="<%=(alternate ? "dark" : "")%>">
+            <td><%= this.occurences %></td>
+            <td><%= this.from %></td>
+            <td><%= this.to %></td>
+            <td><%= function(e) { return e.replace("<", "&lt;"); }(this.error) %></td>
+        </tr>
+        <% alternate = !alternate; %>
+        ]]>
+    </script> -->
+    <script type="text/javascript" src="./static/js/chart.js"></script>
+    <script type="text/javascript" src="./static/js/locust.js"></script>
+</body>
+
+</html>
